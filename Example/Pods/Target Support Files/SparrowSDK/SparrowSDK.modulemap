@@ -1,0 +1,6 @@
+framework module SparrowSDK {
+  umbrella header "SparrowSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
