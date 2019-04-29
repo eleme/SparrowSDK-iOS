@@ -87,6 +87,9 @@
                                    [strongSelf.tableView reloadData];
                                    return;
                                }
+                               strongSelf.projectsData.total = newPorjectsData.total;
+                               strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
+
                                [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
 
                                NSSet<SPRProject *> *seletedProjectsFromCache = [SPRCacheManager getProjectsFromCache];
@@ -99,7 +102,6 @@
                                    }
                                }
 
-                               strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
                                [strongSelf.tableView reloadData];
                            }
                        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -203,7 +205,7 @@
     }];
     [button addTarget:self action:@selector(fetchProjects) forControlEvents:UIControlEventTouchUpInside];
 
-    BOOL result = (self.projectsData.currentPage - 1) * self.projectsData.limit < self.projectsData.total;
+    BOOL result = (self.projectsData.currentPage) * self.projectsData.limit < self.projectsData.total;
     button.enabled = result;
     return footer;
 }
